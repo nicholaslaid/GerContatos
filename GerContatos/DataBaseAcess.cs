@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GerContatos
 {
     public class DataBaseAcess
-    {
+    { 
         public NpgsqlConnection OpenConnection()
         {
             string connectionString = String.Format(
