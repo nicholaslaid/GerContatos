@@ -7,10 +7,20 @@ using System.Threading.Tasks;
 
 namespace GerContatos
 {
+    
+    public enum Operation
+    {
+        Add = 1,
+        Edit = 2
+    }
+
     public class Config
     {
-        //Credenciais de acesso ao banco
-        public static string dbHost = ConfigurationManager.AppSettings["dbHost"];
+        public static Contacts tempContact = new Contacts();
+        public static Operation op = new Operation();
+    
+    //Credenciais de acesso ao banco
+    public static string dbHost = ConfigurationManager.AppSettings["dbHost"];
         public static string dbPort = ConfigurationManager.AppSettings["dbPort"];
         public static string dbName = ConfigurationManager.AppSettings["dbName"];
         public static string dbUser = ConfigurationManager.AppSettings["dbUser"];
