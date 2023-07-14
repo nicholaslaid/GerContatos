@@ -13,11 +13,13 @@ namespace GerContatos
         public string name { get; set; }
         public string image { get; set; }
 
-        public int telefone { get; set; }
+        public string telefone { get; set; }
         public string email { get; set; }
 
         public Bitmap imageBmp { get; set; }
-        public bool Add(Contacts contacts)
+
+
+        public bool Add(Contacts contacts, bool image)
         {
             bool result = false;
 
@@ -25,22 +27,46 @@ namespace GerContatos
 
             try
             {
-                using (NpgsqlCommand cmd = new NpgsqlCommand())
+                if (image)
                 {
-                    cmd.CommandText = @"INSERT INTO contatos (name, image, telefone, email) " +
-                                      @"VALUES (@name, @image, @telefone, @email);";
-
-
-                    cmd.Parameters.AddWithValue("@name", contacts.name);
-                    cmd.Parameters.AddWithValue("@image", contacts.image);
-                    cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
-                    cmd.Parameters.AddWithValue("@email", contacts.email);
-
-                    using (cmd.Connection = dba.OpenConnection())
+                    //Gravação com imagem
+                    using (NpgsqlCommand cmd = new NpgsqlCommand())
                     {
-                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = @"INSERT INTO contatos (name, image, telefone, email) " +
+                                          @"VALUES (@name, @image, @telefone, @email);";
+
+
+                        cmd.Parameters.AddWithValue("@name", contacts.name);
+                        cmd.Parameters.AddWithValue("@image", contacts.image);
+                        cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
+                        cmd.Parameters.AddWithValue("@email", contacts.email);
+
+                        using (cmd.Connection = dba.OpenConnection())
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                        result = true;
                     }
-                    result = true;
+                }
+                else
+                {
+                    //Gravação sem imagem
+                    using (NpgsqlCommand cmd = new NpgsqlCommand())
+                    {
+                        cmd.CommandText = @"INSERT INTO contatos (name, telefone, email) " +
+                                          @"VALUES (@name, @telefone, @email);";
+
+
+                        cmd.Parameters.AddWithValue("@name", contacts.name);
+                        cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
+                        cmd.Parameters.AddWithValue("@email", contacts.email);
+
+                        using (cmd.Connection = dba.OpenConnection())
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                        result = true;
+                    }
                 }
             }
             catch
@@ -90,12 +116,31 @@ namespace GerContatos
                     {
                         if (reader.Read())
                         {
+                            result.id = Convert.ToInt32(reader["id"]);
                             result.name = reader["name"].ToString();
-                            result.image = reader["image"].ToString();
-                            result.name = reader["telefone"].ToString();
-                            result.image = reader["email"].ToString();
+                           
+                            result.telefone = reader["telefone"].ToString();
+                            result.email = reader["email"].ToString();
                             result.imageBmp = new Bitmap(Path.Combine(Config.appRootFolder, Config.imageFolder, result.image));
 
+                            if (reader["id"] != DBNull.Value)
+                                result.image = reader["image"].ToString();
+                            else
+                                result.image = string.Empty;
+
+                            if (!string.IsNullOrEmpty(result.image))
+                            {
+                                using(var stream = new FileStream(Path.Combine(Config.imageFolder, result.image), FileMode.Open))
+                                {
+                                    Bitmap bmp = new Bitmap(stream);
+                                    result.imageBmp = bmp;
+                                }
+                            }
+                            else
+                            {
+                                result.imageBmp = new Bitmap(Path.Combine(Config.imageDefaultPath));
+
+                            }
                         }
                     }
                 }
@@ -115,8 +160,8 @@ namespace GerContatos
             {
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
-                    cmd.CommandText = @"SELECT p.id, p.name, p.email, p.telefone" +
-                                      @"FROM contatos p" +
+                    cmd.CommandText = @"SELECT p.id, p.name, p.email, p.telefone, p.image " +
+                                      @"FROM contatos p " +
                                       @"ORDER BY p.id;";
 
                     using (cmd.Connection = dba.OpenConnection())
@@ -125,15 +170,34 @@ namespace GerContatos
                         while (reader.Read())
                         {
                             Contacts contacts = new Contacts();
+
                             contacts.id = Convert.ToInt32(reader["id"]);
                             contacts.name = reader["name"].ToString();
-                            contacts.image = reader["image"].ToString();
                             contacts.email = reader["email"].ToString();
-                            contacts.telefone = Convert.ToInt32(reader["telefone"]);
+                            contacts.telefone = reader["telefone"].ToString();
 
-                            contacts.imageBmp = new Bitmap(Path.Combine(Config.appRootFolder, Config.imageFolder, contacts.image));
+                            //contacts.imageBmp = new Bitmap(Path.Combine(Config.appRootFolder, Config.imageFolder, contacts.image));
+
+                            if (reader["image"] != DBNull.Value)
+                                contacts.image = reader["image"].ToString();
+                            else
+                                contacts.image = string.Empty;
+
+                            if (!string.IsNullOrEmpty(contacts.image))
+                            {
+                                using (var stream = new FileStream(Path.Combine(Config.imageFolder, contacts.image), FileMode.Open))
+                                {
+                                    Bitmap bmp = new Bitmap(stream);
+                                    contacts.imageBmp = bmp;
+                                }
+                            }
+                            else
+                            {
+                                contacts.imageBmp = new Bitmap(Path.Combine(Config.imageDefaultPath));
+                            }
 
                             result.Add(contacts);
+
                         }
                     }
                 }
@@ -184,10 +248,10 @@ namespace GerContatos
                                       @"WHERE id = @id;";
 
                     cmd.Parameters.AddWithValue("@id", contacts.id);
-                    cmd.Parameters.AddWithValue("@idSeller", contacts.name);
-                    cmd.Parameters.AddWithValue("@name", contacts.email);
-                    cmd.Parameters.AddWithValue("@model", contacts.telefone);
-                    cmd.Parameters.AddWithValue("@quantity", contacts.image);
+                    cmd.Parameters.AddWithValue("@name", contacts.name);
+                    cmd.Parameters.AddWithValue("@email", contacts.email);
+                    cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
+                    cmd.Parameters.AddWithValue("@image", contacts.image);
                    
 
                     using (cmd.Connection = dba.OpenConnection())
@@ -203,5 +267,6 @@ namespace GerContatos
             return result;
         }
 
+       
     }
 }

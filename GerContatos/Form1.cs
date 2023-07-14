@@ -42,36 +42,29 @@ namespace GerContatos
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Config.op == Operation.Add)
-            {
-                Add();
-            }
-            else if (Config.op == Operation.Edit)
-            {
-                Edit();
-            }
+            bool image = false;
+            Contacts contacts = new Contacts();
+
+            contacts.name = txt1.Text;
+            contacts.email = txt2.Text;
+            contacts.telefone = txt3.Text;
+
             if (!string.IsNullOrEmpty(openedImage))
             {
                 FileInfo fileInfo = new FileInfo(openedImage);
-
-                Contacts contacts = new Contacts();
-                contacts.name = "";
                 contacts.image = Guid.NewGuid().ToString() + fileInfo.Extension;
-
                 bool response = contacts.SaveImageToFile(openedImage, Config.imageFolder, contacts.image);
-
-                if (response)
-                {
-                    bool responseAdd = contacts.Add(contacts);
-
-                    if (responseAdd)
-                    {
-                        MessageBox.Show("Gravação feita com sucesso");
-                    }
-                }
+                image = true;
             }
-        }
 
+            bool responseAdd = contacts.Add(contacts, image);
+
+            if (responseAdd)
+            {
+                LoadContatos();
+            }
+
+        }
 
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -126,12 +119,12 @@ namespace GerContatos
                 contacts.id = Convert.ToInt32(txt4);
                 contacts.name = txt1.Text;
                 contacts.email = txt2.Text;
-                contacts.telefone = Convert.ToInt32(txt3.Text);
+                contacts.telefone = txt3.Text;
                 contacts.image = Guid.NewGuid().ToString() + fileInfo.Extension;
 
 
 
-                bool response = contacts.Add(contacts);
+                bool response = contacts.Add(contacts, false);
 
                 if (!response)
                     MessageBox.Show("Erro ao tentar gravar o produto");
@@ -157,7 +150,7 @@ namespace GerContatos
                     Contacts contacts = new Contacts();
 
                     contacts.id = Convert.ToInt32(txt4.Text);
-                    contacts.telefone = Convert.ToInt32(txt3.Text);
+                    contacts.telefone = txt3.Text;
                     contacts.name = txt1.Text;
                     contacts.email = txt2.Text;
                     contacts.image = Guid.NewGuid().ToString() + fileInfo.Extension;
@@ -178,14 +171,57 @@ namespace GerContatos
 
         private void LoadContatos()
         {
-            txt4.Text = Config.tempContact.email.ToString();
-            txt1.Text = Config.tempContact.id.ToString();
-            txt2.Text = Config.tempContact.telefone.ToString();
-            txt3.Text = Config.tempContact.name.ToString();
+            //txt4.Text = Config.tempContact.email.ToString();
+            //txt1.Text = Config.tempContact.id.ToString();
+            //txt2.Text = Config.tempContact.telefone.ToString();
+            //txt3.Text = Config.tempContact.name.ToString();
 
+            dataGridView1.AutoGenerateColumns = false;
             Contacts contacts = new Contacts();
             dataGridView1.DataSource = contacts.GetAll();
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void txt4_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txt3_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txt2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txt1_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
         }
     }
 }

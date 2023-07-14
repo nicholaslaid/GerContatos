@@ -31,5 +31,12 @@ namespace GerContatos
 
         public static string imageFolder = Path.Combine(appRootFolder,
             ConfigurationManager.AppSettings["imageFolder"]);
+
+
+        public static string imageDefaultFolder = ConfigurationManager.AppSettings["imageDefaultFolder"];
+
+        public static string imageDefaultFile = ConfigurationManager.AppSettings["imageDefaultFile"];
+
+        public static string imageDefaultPath = Path.Combine(appRootFolder, imageDefaultFolder, imageDefaultFile);
     }
 }
