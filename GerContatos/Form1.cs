@@ -72,18 +72,18 @@ namespace GerContatos
             try
             {
                 Contacts contacts = new Contacts();
-                int id = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["id"].Value);
+                int id = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["Identificador"].Value);
 
-                if (e.ColumnIndex == dataGridView1.Columns["edit"].Index)
+                if (e.ColumnIndex == dataGridView1.Columns["Editar"].Index)
                 {
                     Config.op = Operation.Edit;
                     Config.tempContact = contacts.Get(id);
 
-                    Form1 edit = new Form1();
+                    FormAdd edit = new FormAdd();
                     edit.ShowDialog();
 
                 }
-                else if (e.ColumnIndex == dataGridView1.Columns["delete"].Index)
+                else if (e.ColumnIndex == dataGridView1.Columns["Deletar"].Index)
                 {
                     DialogResult dialogResult = MessageBox.Show(
                     "Comfirma Exclusão", "Excluir",
@@ -136,54 +136,14 @@ namespace GerContatos
             { }
         }
 
-        private void Edit()
-        {
-            FileInfo fileInfo = new FileInfo(openedImage);
-            try
-            {
-                DialogResult dialog = MessageBox.Show("Confirma alteração?", "Alterar",
-                                                      MessageBoxButtons.YesNo,
-                                                      MessageBoxIcon.Question);
-
-                if (dialog == DialogResult.Yes)
-                {
-                    Contacts contacts = new Contacts();
-
-                    contacts.id = Convert.ToInt32(txt4.Text);
-                    contacts.telefone = txt3.Text;
-                    contacts.name = txt1.Text;
-                    contacts.email = txt2.Text;
-                    contacts.image = Guid.NewGuid().ToString() + fileInfo.Extension;
-
-
-
-                    bool response = contacts.Update(contacts);
-
-                    if (!response)
-                        MessageBox.Show("Erro ao tentar alterar");
-                    else
-                        this.Close();
-                }
-            }
-            catch (Exception ex)
-            { }
-        }
+        
 
         private void LoadContatos()
         {
-            //txt4.Text = Config.tempContact.email.ToString();
-            //txt1.Text = Config.tempContact.id.ToString();
-            //txt2.Text = Config.tempContact.telefone.ToString();
-            //txt3.Text = Config.tempContact.name.ToString();
 
             dataGridView1.AutoGenerateColumns = false;
             Contacts contacts = new Contacts();
             dataGridView1.DataSource = contacts.GetAll();
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
 
@@ -222,6 +182,34 @@ namespace GerContatos
 
         private void pbImage_Click(object sender, EventArgs e)
         {
+        }
+
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            {
+                bool image = false;
+                Contacts contacts = new Contacts();
+
+                contacts.name = txt1.Text;
+                contacts.email = txt2.Text;
+                contacts.telefone = txt3.Text;
+
+                if (!string.IsNullOrEmpty(openedImage))
+                {
+                    FileInfo fileInfo = new FileInfo(openedImage);
+                    contacts.image = Guid.NewGuid().ToString() + fileInfo.Extension;
+                    bool response = contacts.SaveImageToFile(openedImage, Config.imageFolder, contacts.image);
+                    image = true;
+                }
+
+                bool responseAdd = contacts.Add(contacts, image);
+
+                if (responseAdd)
+                {
+                    LoadContatos();
+                }
+
+            }
         }
     }
 }

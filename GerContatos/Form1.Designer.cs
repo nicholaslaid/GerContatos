@@ -40,18 +40,24 @@
             label4 = new Label();
             txt4 = new TextBox();
             id = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            btnAdicionar = new Button();
+            imageBmp = new DataGridViewImageColumn();
+            Imagem = new DataGridViewTextBoxColumn();
+            Identificador = new DataGridViewTextBoxColumn();
+            name = new DataGridViewTextBoxColumn();
+            Telefone = new DataGridViewTextBoxColumn();
             Email = new DataGridViewTextBoxColumn();
+            Editar = new DataGridViewButtonColumn();
+            Deletar = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)pbImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // btnOpen
             // 
-            btnOpen.Location = new Point(75, 157);
-            btnOpen.Margin = new Padding(2);
+            btnOpen.Location = new Point(107, 262);
             btnOpen.Name = "btnOpen";
-            btnOpen.Size = new Size(78, 32);
+            btnOpen.Size = new Size(111, 53);
             btnOpen.TabIndex = 2;
             btnOpen.Text = "Abrir";
             btnOpen.UseVisualStyleBackColor = true;
@@ -59,10 +65,9 @@
             // 
             // pbImage
             // 
-            pbImage.Location = new Point(31, 7);
-            pbImage.Margin = new Padding(2);
+            pbImage.Location = new Point(44, 12);
             pbImage.Name = "pbImage";
-            pbImage.Size = new Size(184, 135);
+            pbImage.Size = new Size(263, 225);
             pbImage.TabIndex = 3;
             pbImage.TabStop = false;
             pbImage.Click += pbImage_Click;
@@ -72,24 +77,22 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, Email });
-            dataGridView1.Location = new Point(237, 7);
-            dataGridView1.Margin = new Padding(2);
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { imageBmp, Imagem, Identificador, name, Telefone, Email, Editar, Deletar });
+            dataGridView1.Location = new Point(348, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(673, 201);
+            dataGridView1.Size = new Size(964, 335);
             dataGridView1.TabIndex = 4;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(231, 258);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(330, 430);
             label1.Name = "label1";
-            label1.Size = new Size(41, 15);
+            label1.Size = new Size(62, 25);
             label1.TabIndex = 6;
             label1.Text = "Phone";
             label1.Click += label1_Click;
@@ -97,10 +100,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(231, 229);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(330, 382);
             label2.Name = "label2";
-            label2.Size = new Size(40, 15);
+            label2.Size = new Size(61, 25);
             label2.TabIndex = 7;
             label2.Text = "Nome";
             label2.Click += label2_Click;
@@ -108,10 +110,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(433, 230);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(619, 383);
             label3.Name = "label3";
-            label3.Size = new Size(36, 15);
+            label3.Size = new Size(54, 25);
             label3.TabIndex = 8;
             label3.Text = "Email";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -119,38 +120,34 @@
             // 
             // txt1
             // 
-            txt1.Location = new Point(292, 227);
-            txt1.Margin = new Padding(2);
+            txt1.Location = new Point(417, 378);
             txt1.Name = "txt1";
-            txt1.Size = new Size(106, 23);
+            txt1.Size = new Size(150, 31);
             txt1.TabIndex = 9;
             txt1.TextChanged += txt1_TextChanged;
             // 
             // txt3
             // 
-            txt3.Location = new Point(491, 229);
-            txt3.Margin = new Padding(2);
+            txt3.Location = new Point(701, 382);
             txt3.Name = "txt3";
-            txt3.Size = new Size(106, 23);
+            txt3.Size = new Size(150, 31);
             txt3.TabIndex = 10;
             txt3.TextChanged += txt3_TextChanged;
             // 
             // txt2
             // 
-            txt2.Location = new Point(292, 254);
-            txt2.Margin = new Padding(2);
+            txt2.Location = new Point(417, 423);
             txt2.Name = "txt2";
-            txt2.Size = new Size(106, 23);
+            txt2.Size = new Size(150, 31);
             txt2.TabIndex = 11;
             txt2.TextChanged += txt2_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(433, 258);
-            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Location = new Point(619, 430);
             label4.Name = "label4";
-            label4.Size = new Size(17, 15);
+            label4.Size = new Size(27, 25);
             label4.TabIndex = 13;
             label4.Text = "id";
             label4.Click += label4_Click;
@@ -158,10 +155,9 @@
             // txt4
             // 
             txt4.Enabled = false;
-            txt4.Location = new Point(491, 256);
-            txt4.Margin = new Padding(2);
+            txt4.Location = new Point(701, 427);
             txt4.Name = "txt4";
-            txt4.Size = new Size(106, 23);
+            txt4.Size = new Size(150, 31);
             txt4.TabIndex = 14;
             txt4.TextChanged += txt4_TextChanged;
             // 
@@ -174,25 +170,98 @@
             id.Visible = false;
             id.Width = 150;
             // 
-            // dataGridViewTextBoxColumn1
+            // btnAdicionar
             // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "id";
-            dataGridViewTextBoxColumn1.HeaderText = "Identificador";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
+            btnAdicionar.Location = new Point(947, 396);
+            btnAdicionar.Name = "btnAdicionar";
+            btnAdicionar.Size = new Size(112, 34);
+            btnAdicionar.TabIndex = 15;
+            btnAdicionar.Text = "Add";
+            btnAdicionar.UseVisualStyleBackColor = true;
+            btnAdicionar.Click += btnAdicionar_Click;
+            // 
+            // imageBmp
+            // 
+            imageBmp.DataPropertyName = "imageBmp";
+            imageBmp.HeaderText = "Imagem";
+            imageBmp.MinimumWidth = 8;
+            imageBmp.Name = "imageBmp";
+            imageBmp.ReadOnly = true;
+            imageBmp.Width = 150;
+            // 
+            // Imagem
+            // 
+            Imagem.DataPropertyName = "image";
+            Imagem.HeaderText = "Imagem";
+            Imagem.MinimumWidth = 8;
+            Imagem.Name = "Imagem";
+            Imagem.ReadOnly = true;
+            Imagem.Visible = false;
+            Imagem.Width = 150;
+            // 
+            // Identificador
+            // 
+            Identificador.DataPropertyName = "id";
+            Identificador.HeaderText = "Identificador";
+            Identificador.MinimumWidth = 8;
+            Identificador.Name = "Identificador";
+            Identificador.ReadOnly = true;
+            Identificador.Visible = false;
+            Identificador.Width = 150;
+            // 
+            // name
+            // 
+            name.DataPropertyName = "name";
+            name.HeaderText = "Nome";
+            name.MinimumWidth = 8;
+            name.Name = "name";
+            name.ReadOnly = true;
+            name.Width = 150;
+            // 
+            // Telefone
+            // 
+            Telefone.DataPropertyName = "telefone";
+            Telefone.HeaderText = "Telefone";
+            Telefone.MinimumWidth = 8;
+            Telefone.Name = "Telefone";
+            Telefone.ReadOnly = true;
+            Telefone.Width = 150;
             // 
             // Email
             // 
             Email.DataPropertyName = "email";
             Email.HeaderText = "email";
+            Email.MinimumWidth = 8;
             Email.Name = "Email";
             Email.ReadOnly = true;
+            Email.Width = 150;
+            // 
+            // Editar
+            // 
+            Editar.HeaderText = "Editar";
+            Editar.MinimumWidth = 8;
+            Editar.Name = "Editar";
+            Editar.ReadOnly = true;
+            Editar.Text = "Editar";
+            Editar.UseColumnTextForButtonValue = true;
+            Editar.Width = 150;
+            // 
+            // Deletar
+            // 
+            Deletar.HeaderText = "Deletar";
+            Deletar.MinimumWidth = 8;
+            Deletar.Name = "Deletar";
+            Deletar.ReadOnly = true;
+            Deletar.Text = "Deletar";
+            Deletar.UseColumnTextForButtonValue = true;
+            Deletar.Width = 150;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(927, 329);
+            ClientSize = new Size(1324, 548);
+            Controls.Add(btnAdicionar);
             Controls.Add(txt4);
             Controls.Add(label4);
             Controls.Add(txt2);
@@ -204,7 +273,6 @@
             Controls.Add(dataGridView1);
             Controls.Add(pbImage);
             Controls.Add(btnOpen);
-            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -228,7 +296,15 @@
         private Label label4;
         private TextBox txt4;
         private DataGridViewTextBoxColumn id;
+        private Button btnAdicionar;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewImageColumn imageBmp;
+        private DataGridViewTextBoxColumn Imagem;
+        private DataGridViewTextBoxColumn Identificador;
+        private DataGridViewTextBoxColumn name;
+        private DataGridViewTextBoxColumn Telefone;
         private DataGridViewTextBoxColumn Email;
+        private DataGridViewButtonColumn Editar;
+        private DataGridViewButtonColumn Deletar;
     }
 }

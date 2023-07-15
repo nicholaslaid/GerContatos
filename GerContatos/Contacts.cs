@@ -234,7 +234,20 @@ namespace GerContatos
 
             return result;
         }
-        public bool Update(Contacts contacts)
+
+        public bool DeleteImageFile(string filePath)
+        {
+            bool result = false;
+            try
+            {
+                File.Delete(filePath);
+                result = true;
+            }catch(Exception ex) 
+                { }
+
+            return result;
+        }
+        public bool Update(Contacts contacts, bool image)
         {
             bool result = false;
             DataBaseAcess dba = new DataBaseAcess();
