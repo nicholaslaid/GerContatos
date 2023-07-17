@@ -102,12 +102,14 @@ namespace GerContatos
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        bool response = contacts.Delete(id);
+                        contacts = contacts.Get(id);
+
+                        bool response = contacts.DeleteImageFile(Path.Combine(Config.imageFolder, contacts.image));
 
                         if (response)
                         {
+                            contacts.Delete(id);
                             LoadContatos();
-
                         }
                         else
                         {

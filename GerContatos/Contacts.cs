@@ -121,9 +121,8 @@ namespace GerContatos
                            
                             result.telefone = reader["telefone"].ToString();
                             result.email = reader["email"].ToString();
-                            result.imageBmp = new Bitmap(Path.Combine(Config.appRootFolder, Config.imageFolder, result.image));
 
-                            if (reader["id"] != DBNull.Value)
+                            if (reader["image"] != DBNull.Value)
                                 result.image = reader["image"].ToString();
                             else
                                 result.image = string.Empty;
