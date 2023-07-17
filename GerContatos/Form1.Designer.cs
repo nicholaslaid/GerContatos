@@ -31,6 +31,14 @@
             btnOpen = new Button();
             pbImage = new PictureBox();
             dataGridView1 = new DataGridView();
+            imageBmp = new DataGridViewImageColumn();
+            Imagem = new DataGridViewTextBoxColumn();
+            Identificador = new DataGridViewTextBoxColumn();
+            name = new DataGridViewTextBoxColumn();
+            Telefone = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            Editar = new DataGridViewButtonColumn();
+            Deletar = new DataGridViewButtonColumn();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -41,14 +49,6 @@
             txt4 = new TextBox();
             id = new DataGridViewTextBoxColumn();
             btnAdicionar = new Button();
-            imageBmp = new DataGridViewImageColumn();
-            Imagem = new DataGridViewTextBoxColumn();
-            Identificador = new DataGridViewTextBoxColumn();
-            name = new DataGridViewTextBoxColumn();
-            Telefone = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            Editar = new DataGridViewButtonColumn();
-            Deletar = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)pbImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -86,6 +86,82 @@
             dataGridView1.Size = new Size(964, 335);
             dataGridView1.TabIndex = 4;
             dataGridView1.CellClick += dataGridView1_CellClick;
+            // 
+            // imageBmp
+            // 
+            imageBmp.DataPropertyName = "imageBmp";
+            imageBmp.HeaderText = "Imagem";
+            imageBmp.MinimumWidth = 8;
+            imageBmp.Name = "imageBmp";
+            imageBmp.ReadOnly = true;
+            imageBmp.Width = 150;
+            // 
+            // Imagem
+            // 
+            Imagem.DataPropertyName = "image";
+            Imagem.HeaderText = "Imagem";
+            Imagem.MinimumWidth = 8;
+            Imagem.Name = "Imagem";
+            Imagem.ReadOnly = true;
+            Imagem.Visible = false;
+            Imagem.Width = 150;
+            // 
+            // Identificador
+            // 
+            Identificador.DataPropertyName = "id";
+            Identificador.HeaderText = "Identificador";
+            Identificador.MinimumWidth = 8;
+            Identificador.Name = "Identificador";
+            Identificador.ReadOnly = true;
+            Identificador.Visible = false;
+            Identificador.Width = 150;
+            // 
+            // name
+            // 
+            name.DataPropertyName = "name";
+            name.HeaderText = "Nome";
+            name.MinimumWidth = 8;
+            name.Name = "name";
+            name.ReadOnly = true;
+            name.Width = 150;
+            // 
+            // Telefone
+            // 
+            Telefone.DataPropertyName = "telefone";
+            Telefone.HeaderText = "Telefone";
+            Telefone.MinimumWidth = 8;
+            Telefone.Name = "Telefone";
+            Telefone.ReadOnly = true;
+            Telefone.Width = 150;
+            // 
+            // Email
+            // 
+            Email.DataPropertyName = "email";
+            Email.HeaderText = "email";
+            Email.MinimumWidth = 8;
+            Email.Name = "Email";
+            Email.ReadOnly = true;
+            Email.Width = 150;
+            // 
+            // Editar
+            // 
+            Editar.HeaderText = "Editar";
+            Editar.MinimumWidth = 8;
+            Editar.Name = "Editar";
+            Editar.ReadOnly = true;
+            Editar.Text = "Editar";
+            Editar.UseColumnTextForButtonValue = true;
+            Editar.Width = 150;
+            // 
+            // Deletar
+            // 
+            Deletar.HeaderText = "Deletar";
+            Deletar.MinimumWidth = 8;
+            Deletar.Name = "Deletar";
+            Deletar.ReadOnly = true;
+            Deletar.Text = "Deletar";
+            Deletar.UseColumnTextForButtonValue = true;
+            Deletar.Width = 150;
             // 
             // label1
             // 
@@ -180,82 +256,6 @@
             btnAdicionar.UseVisualStyleBackColor = true;
             btnAdicionar.Click += btnAdicionar_Click;
             // 
-            // imageBmp
-            // 
-            imageBmp.DataPropertyName = "imageBmp";
-            imageBmp.HeaderText = "Imagem";
-            imageBmp.MinimumWidth = 8;
-            imageBmp.Name = "imageBmp";
-            imageBmp.ReadOnly = true;
-            imageBmp.Width = 150;
-            // 
-            // Imagem
-            // 
-            Imagem.DataPropertyName = "image";
-            Imagem.HeaderText = "Imagem";
-            Imagem.MinimumWidth = 8;
-            Imagem.Name = "Imagem";
-            Imagem.ReadOnly = true;
-            Imagem.Visible = false;
-            Imagem.Width = 150;
-            // 
-            // Identificador
-            // 
-            Identificador.DataPropertyName = "id";
-            Identificador.HeaderText = "Identificador";
-            Identificador.MinimumWidth = 8;
-            Identificador.Name = "Identificador";
-            Identificador.ReadOnly = true;
-            Identificador.Visible = false;
-            Identificador.Width = 150;
-            // 
-            // name
-            // 
-            name.DataPropertyName = "name";
-            name.HeaderText = "Nome";
-            name.MinimumWidth = 8;
-            name.Name = "name";
-            name.ReadOnly = true;
-            name.Width = 150;
-            // 
-            // Telefone
-            // 
-            Telefone.DataPropertyName = "telefone";
-            Telefone.HeaderText = "Telefone";
-            Telefone.MinimumWidth = 8;
-            Telefone.Name = "Telefone";
-            Telefone.ReadOnly = true;
-            Telefone.Width = 150;
-            // 
-            // Email
-            // 
-            Email.DataPropertyName = "email";
-            Email.HeaderText = "email";
-            Email.MinimumWidth = 8;
-            Email.Name = "Email";
-            Email.ReadOnly = true;
-            Email.Width = 150;
-            // 
-            // Editar
-            // 
-            Editar.HeaderText = "Editar";
-            Editar.MinimumWidth = 8;
-            Editar.Name = "Editar";
-            Editar.ReadOnly = true;
-            Editar.Text = "Editar";
-            Editar.UseColumnTextForButtonValue = true;
-            Editar.Width = 150;
-            // 
-            // Deletar
-            // 
-            Deletar.HeaderText = "Deletar";
-            Deletar.MinimumWidth = 8;
-            Deletar.Name = "Deletar";
-            Deletar.ReadOnly = true;
-            Deletar.Text = "Deletar";
-            Deletar.UseColumnTextForButtonValue = true;
-            Deletar.Width = 150;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -275,6 +275,7 @@
             Controls.Add(btnOpen);
             Name = "Form1";
             Text = "Form1";
+            Activated += Form1_Activated;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pbImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

@@ -254,23 +254,47 @@ namespace GerContatos
 
             try
             {
-                using (NpgsqlCommand cmd = new NpgsqlCommand())
-                {
-                    cmd.CommandText = @"UPDATE contatos " +
-                                      @"SET id = @id, name = @name, email = @email, image = @image, telefone = @telefone" +
-                                      @"WHERE id = @id;";
-
-                    cmd.Parameters.AddWithValue("@id", contacts.id);
-                    cmd.Parameters.AddWithValue("@name", contacts.name);
-                    cmd.Parameters.AddWithValue("@email", contacts.email);
-                    cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
-                    cmd.Parameters.AddWithValue("@image", contacts.image);
-                   
-
-                    using (cmd.Connection = dba.OpenConnection())
+                if (image) { 
+                    using (NpgsqlCommand cmd = new NpgsqlCommand())
                     {
-                        cmd.ExecuteNonQuery();
-                        result = true;
+                        cmd.CommandText = @"UPDATE contatos " +
+                                          @"SET id = @id, name = @name, email = @email, image = @image, telefone = @telefone " +
+                                          @"WHERE id = @id;";
+
+                        cmd.Parameters.AddWithValue("@id", contacts.id);
+                        cmd.Parameters.AddWithValue("@name", contacts.name);
+                        cmd.Parameters.AddWithValue("@email", contacts.email);
+                        cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
+                        cmd.Parameters.AddWithValue("@image", contacts.image);
+
+
+                        using (cmd.Connection = dba.OpenConnection())
+                        {
+                            cmd.ExecuteNonQuery();
+                            result = true;
+                        }
+                    }
+            }
+                else
+                {
+                    using (NpgsqlCommand cmd = new NpgsqlCommand())
+                    {
+                        cmd.CommandText = @"UPDATE contatos " +
+                                          @"SET id = @id, name = @name, email = @email, telefone = @telefone " +
+                                          @"WHERE id = @id;";
+
+                        cmd.Parameters.AddWithValue("@id", contacts.id);
+                        cmd.Parameters.AddWithValue("@name", contacts.name);
+                        cmd.Parameters.AddWithValue("@email", contacts.email);
+                        cmd.Parameters.AddWithValue("@telefone", contacts.telefone);
+
+
+
+                        using (cmd.Connection = dba.OpenConnection())
+                        {
+                            cmd.ExecuteNonQuery();
+                            result = true;
+                        }
                     }
                 }
             }

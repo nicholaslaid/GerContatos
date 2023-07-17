@@ -15,6 +15,16 @@ namespace GerContatos
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            LoadContacts();
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            LoadContacts();
+        }
+
+        private void LoadContacts()
+        {
             Contacts contacts = new Contacts();
             dataGridView1.DataSource = contacts.GetAll();
         }
@@ -136,7 +146,7 @@ namespace GerContatos
             { }
         }
 
-        
+
 
         private void LoadContatos()
         {
@@ -211,5 +221,7 @@ namespace GerContatos
 
             }
         }
+
+        
     }
 }
