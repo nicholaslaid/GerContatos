@@ -240,7 +240,7 @@ namespace GerContatos
             bool result = false;
             try
             {
-                File.Delete(filePath);
+                File.Delete(filePath); 
                 result = true;
             }catch(Exception ex) 
                 { }
